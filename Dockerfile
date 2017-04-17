@@ -1,6 +1,4 @@
-FROM fstehle/rpi-node:4
-
-RUN [ "cross-build-start" ]
+FROM node:4
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends avahi-daemon avahi-discover libnss-mdns libavahi-compat-libdnssd-dev
@@ -12,9 +10,7 @@ RUN mkdir -p /var/run/dbus
 
 EXPOSE 51826
 
-ADD entrypoint.sh /root/entrypoint.sh
+ADD docker/entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
-
-RUN [ "cross-build-end" ]
 
 ENTRYPOINT ["/root/entrypoint.sh"]
